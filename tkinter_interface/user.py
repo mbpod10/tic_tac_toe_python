@@ -30,7 +30,7 @@ class User():
                 print(f"{self.user_number} Wins!")
                 self.winner = True
 
-        if len(self.squares) > 3:
+        if len(self.squares) == 4:
             split_array = self.squares
             for x in split_array:
                 split_array.remove(x)
@@ -40,3 +40,6 @@ class User():
                     self.winner = True
                 else:
                     split_array.append(x)
+
+        if len(self.squares) == 5:
+            pass
