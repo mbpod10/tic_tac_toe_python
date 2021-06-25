@@ -25,21 +25,11 @@ class User():
         self.squares.append(square)
         self.squares.sort()
 
-        if len(self.squares) == 3:
-            if self.squares in WINNING_SQUARES:
-                print(f"{self.user_number} Wins!")
-                self.winner = True
-
-        if len(self.squares) == 4:
-            split_array = self.squares
-            for x in split_array:
-                split_array.remove(x)
-                split_array.sort()
-                if split_array in WINNING_SQUARES:
-                    print(f"{self.user_number} Wins!")
+        if len(self.squares) >= 3:
+            for arr in WINNING_SQUARES:
+                return_arry = []
+                for x in self.squares:
+                    if x in arr:
+                        return_arry.append(x)
+                if return_arry == arr:
                     self.winner = True
-                else:
-                    split_array.append(x)
-
-        if len(self.squares) == 5:
-            pass
