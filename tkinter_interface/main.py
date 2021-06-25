@@ -6,6 +6,7 @@ from user import User
 
 YELLOW = "#f7f5dd"
 SQUARES = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+FONT_NAME = "Ariel"
 
 window = Tk()
 o_image = PhotoImage(file='images/o.png')
@@ -18,8 +19,8 @@ window.title("Tic Tac Toe")
 window.config(padx=20, pady=20, bg=YELLOW)
 background_image = PhotoImage(file='images/bg.png')
 
-player1 = User(symbol=x_image, user_number=1)
-player2 = User(symbol=o_image, user_number=2)
+player1 = User(symbol=x_image, user_number=1, letter='X')
+player2 = User(symbol=o_image, user_number=2, letter='O')
 
 
 current_player = player1
@@ -28,9 +29,13 @@ other_player = player2
 
 def change_player():
     global current_player, other_player
-    new = current_player
-    current_player = other_player
-    other_player = new
+    print(f"{current_player.user_number} {current_player.squares}")
+    if current_player.winner:
+        print("WINNERRRRRRRRRRRRRRRRRRRRRRRR")
+    else:
+        new = current_player
+        current_player = other_player
+        other_player = new
 
 
 # ___________________________________1__________________________________________
@@ -43,15 +48,13 @@ quad1.grid(column=1, row=0)
 def callback1(event):
     global current_player, other_player
     if 1 in SQUARES:
-        print(f'CURRENT PLAYER {current_player.user_number}')
         quad1.create_image(100, 100, image=current_player.symbol)
         quad1.itemconfig(background_image, image=current_player.symbol)
         current_player.pick_square(square=1)
-        print(current_player.squares)
         SQUARES.remove(1)
-        print(SQUARES)
         change_player()
-        print(f' SWITCHED TO CURRENT PLAYER {current_player.user_number}')
+        turn_canvas.itemconfig(
+            language_text, text=f"{current_player.user_number} ({current_player.letter}) Turn", fill='black')
     else:
         print("This square has already been selected, please select again")
 
@@ -67,19 +70,14 @@ quad2.grid(column=2, row=0)
 
 
 def callback2(event):
-    global current_player, other_player
     if 2 in SQUARES:
-        print(f'CURRENT PLAYER {current_player.user_number}')
         quad2.create_image(100, 100, image=current_player.symbol)
-        # quad2.itemconfig(current_player.symbol, image=o_image)
         quad2.itemconfig(background_image, image=current_player.symbol)
         current_player.pick_square(square=2)
-        print(current_player.squares)
         SQUARES.remove(2)
-        print(SQUARES)
         change_player()
-
-        print(f' SWITCHED TO CURRENT PLAYER {current_player.user_number}')
+        turn_canvas.itemconfig(
+            language_text, text=f"{current_player.user_number} ({current_player.letter}) Turn", fill='black')
     else:
         print("This square has already been selected, please select again")
 
@@ -95,21 +93,14 @@ quad3.grid(column=3, row=0)
 
 
 def callback3(event):
-    global current_player, other_player
     if 3 in SQUARES:
-        print(f'CURRENT PLAYER {current_player.user_number}')
         quad3.create_image(100, 100, image=current_player.symbol)
-        # quad3.itemconfig(current_player.symbol, image=o_image)
         quad3.itemconfig(background_image, image=current_player.symbol)
         current_player.pick_square(square=3)
-        if current_player.winner:
-            print(f"{current_player.user_number} is THE ULTIMATE WINNER!")
-        print(current_player.squares)
         SQUARES.remove(3)
-        print(SQUARES)
         change_player()
-
-        print(f' SWITCHED TO CURRENT PLAYER {current_player.user_number}')
+        turn_canvas.itemconfig(
+            language_text, text=f"{current_player.user_number} ({current_player.letter}) Turn", fill='black')
     else:
         print("This square has already been selected, please select again")
 
@@ -123,16 +114,14 @@ quad4.grid(column=1, row=1)
 
 
 def callback4(event):
-    global current_player, other_player
     if 4 in SQUARES:
         quad4.create_image(100, 100, image=current_player.symbol)
-        quad4.itemconfig(current_player.symbol, image=o_image)
+        quad4.itemconfig(background_image, image=current_player.symbol)
         current_player.pick_square(square=4)
-        print(current_player.squares)
         SQUARES.remove(4)
-        print(SQUARES)
         change_player()
-
+        turn_canvas.itemconfig(
+            language_text, text=f"{current_player.user_number} ({current_player.letter}) Turn", fill='black')
     else:
         print("This square has already been selected, please select again")
 
@@ -146,15 +135,14 @@ quad5.grid(column=2, row=1)
 
 
 def callback5(event):
-    global current_player, other_player
     if 5 in SQUARES:
         quad5.create_image(100, 100, image=current_player.symbol)
-        quad5.itemconfig(current_player.symbol, image=o_image)
+        quad5.itemconfig(background_image, image=current_player.symbol)
         current_player.pick_square(square=5)
-        print(current_player.squares)
         SQUARES.remove(5)
-        print(SQUARES)
         change_player()
+        turn_canvas.itemconfig(
+            language_text, text=f"{current_player.user_number} ({current_player.letter}) Turn", fill='black')
     else:
         print("This square has already been selected, please select again")
 
@@ -171,12 +159,12 @@ def callback6(event):
     global current_player, other_player
     if 6 in SQUARES:
         quad6.create_image(100, 100, image=current_player.symbol)
-        quad6.itemconfig(current_player.symbol, image=o_image)
-        current_player.squares.append(6)
-        print(current_player.squares)
+        quad6.itemconfig(background_image, image=current_player.symbol)
+        current_player.pick_square(square=6)
         SQUARES.remove(6)
-        print(SQUARES)
         change_player()
+        turn_canvas.itemconfig(
+            language_text, text=f"{current_player.user_number} ({current_player.letter}) Turn", fill='black')
     else:
         print("This square has already been selected, please select again")
 
@@ -190,8 +178,16 @@ quad7.grid(column=1, row=3)
 
 
 def callback7(event):
-    quad7.create_image(100, 100, image=current_player.symbol)
-    quad7.itemconfig(current_player.symbol, image=o_image)
+    if 7 in SQUARES:
+        quad7.create_image(100, 100, image=current_player.symbol)
+        quad7.itemconfig(background_image, image=current_player.symbol)
+        current_player.pick_square(square=7)
+        SQUARES.remove(7)
+        change_player()
+        turn_canvas.itemconfig(
+            language_text, text=f"{current_player.user_number} ({current_player.letter}) Turn", fill='black')
+    else:
+        print("This square has already been selected, please select again")
 
 
 quad7.bind("<Button-1>", callback7)
@@ -203,8 +199,16 @@ quad8.grid(column=2, row=3)
 
 
 def callback8(event):
-    quad8.create_image(100, 100, image=current_player.symbol)
-    quad8.itemconfig(current_player.symbol, image=o_image)
+    if 8 in SQUARES:
+        quad8.create_image(100, 100, image=current_player.symbol)
+        quad8.itemconfig(background_image, image=current_player.symbol)
+        current_player.pick_square(square=8)
+        SQUARES.remove(8)
+        change_player()
+        turn_canvas.itemconfig(
+            language_text, text=f"{current_player.user_number} ({current_player.letter}) Turn", fill='black')
+    else:
+        print("This square has already been selected, please select again")
 
 
 quad8.bind("<Button-1>", callback8)
@@ -216,11 +220,27 @@ quad9.grid(column=3, row=3)
 
 
 def callback9(event):
-    quad9.create_image(100, 100, image=current_player.symbol)
-    quad9.itemconfig(current_player.symbol, image=o_image)
+    if 9 in SQUARES:
+        quad9.create_image(100, 100, image=current_player.symbol)
+        quad9.itemconfig(background_image, image=current_player.symbol)
+        current_player.pick_square(square=9)
+        SQUARES.remove(9)
+        change_player()
+        turn_canvas.itemconfig(
+            language_text, text=f"{current_player.user_number} ({current_player.letter}) Turn", fill='black')
+    else:
+        print("This square has already been selected, please select again")
 
 
 quad9.bind("<Button-1>", callback9)
+
+turn_canvas = Canvas(width=600, height=100, highlightthickness=2,
+                     highlightbackground="red")
+
+turn_canvas.grid(column=1, row=4, columnspan=3)
+
+language_text = turn_canvas.create_text(300, 50, text=f"{current_player.user_number} ({current_player.letter}) Turn", fill='black',
+                                        font=(FONT_NAME, 40, 'italic'))
 
 
 window.mainloop()
