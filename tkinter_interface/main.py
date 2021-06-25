@@ -17,7 +17,8 @@ x_image = x_image.subsample(5)
 
 
 window.title("Tic Tac Toe")
-window.config(padx=20, pady=20, bg="lightblue")
+window.config(padx=20, pady=20, bg="lightblue", cursor="hand2")
+
 background_image = PhotoImage(file='images/bg.png')
 
 player1 = User(symbol=x_image, user_number=1, letter='X')
