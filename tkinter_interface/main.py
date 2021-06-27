@@ -20,6 +20,7 @@ window.title("Tic Tac Toe")
 window.config(padx=20, pady=20, bg="lightblue", cursor="hand2")
 
 background_image = PhotoImage(file='images/bg.png')
+# background_image = background_image.subsample(1)
 
 player1 = User(symbol=x_image, user_number=1, letter='X')
 player2 = User(symbol=o_image, user_number=2, letter='O')

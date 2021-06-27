@@ -1,0 +1,1 @@
+![winning_squares](https://i.imgur.com/rBp0I2E.jpg "SQUARES")
