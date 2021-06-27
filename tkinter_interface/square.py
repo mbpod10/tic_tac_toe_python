@@ -8,7 +8,7 @@ class Square(Canvas):
         self.number = number
         self.grid(column=column, row=row)
         self.create_image(100, 100, image=background_image)
-        self.bind("<Button-1>", self.call_back)
+    #     self.bind("<Button-1>", self.call_back)
 
-    def call_back(self, event):
-        print(self.number)
+    # def call_back(self, event):
+    #     print(self.number)
