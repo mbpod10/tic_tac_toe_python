@@ -1,9 +1,8 @@
 ## Tic Tac Toe (Tkinter)
 
-
-
 Logic to see if a player has tic-tac-toe:
 ![winning_squares](https://i.imgur.com/rBp0I2E.jpg "SQUARES" =200x400)
+<img src="https://i.imgur.com/rBp0I2E.jpg" alt="drawing" width="200" height=400/>
 
 The squares are all labeled from 1 to 9. If a player has a winning combination of:
 ```python
