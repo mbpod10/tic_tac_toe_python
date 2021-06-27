@@ -1,1 +1,1 @@
-![winning_squares](https://i.imgur.com/rBp0I2E.jpg "SQUARES")
+![winning_squares](https://i.imgur.com/rBp0I2E.jpg "SQUARES" width="200" height="400")
